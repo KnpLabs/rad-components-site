@@ -145,6 +145,7 @@ article.component.red {
 
 article.component .content {
     padding: 5em 0;
+    color: white;
 }
 
 footer {
@@ -164,4 +165,33 @@ footer .knp-network ul li a {
 
 footer .knp-network ul li a:hover {
     color: #171717;
+}
+
+.content .standard, .content .rad {
+    background-color: #222222;
+    padding: 0;
+}
+
+figure.highlight pre {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    font-size: 1.1em;
+}
+
+.content .standard .banner {
+    width: 120px;
+    height: 49px;
+    position: absolute;
+    right: -32px;
+    background: url(/images/standard.png) no-repeat right top;
+}
+
+.content .rad .banner {
+    width: 92px;
+    height: 41px;
+    position: absolute;
+    right: -15px;
+    background: url(/images/rad.png) no-repeat right top;
+    top: 3px;
 }
