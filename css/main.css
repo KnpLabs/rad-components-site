@@ -129,7 +129,7 @@ h1, h2, h3 {
 }
 
 .benefit-box .service-icon i {
-    background: url("/images/edgar-knp.png");
+    background: url("images/edgar-knp.png");
     background-size: contain;
 }
 
@@ -260,7 +260,7 @@ figure.highlight pre {
     height: 49px;
     position: absolute;
     right: -32px;
-    background: url(/images/standard.png) no-repeat right top;
+    background: url(images/standard.png) no-repeat right top;
 }
 
 .content .rad .banner {
@@ -268,6 +268,6 @@ figure.highlight pre {
     height: 41px;
     position: absolute;
     right: -15px;
-    background: url(/images/rad.png) no-repeat right top;
+    background: url(images/rad.png) no-repeat right top;
     top: 3px;
 }
