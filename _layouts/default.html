@@ -3,9 +3,65 @@
   <head>
     <meta charset="utf-8" />
     <title>KNP Rad Components</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
+
+    <header>
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="">
+              <img src="/images/rad-logo.png" alt="KNP Rad Components" />
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    {% include jumbotron.html %}
+    {% include why.html %}
+
+    <section id="discover" class="components-list">
+      <article class="component blue">
+        <header>
+          <div class="container">
+            <h2>Resource Resolver</h2>
+            <p>This component blablabla</p>
+          </div>
+        </header>
+        <div class="container content">
+          <h3>Allow awesome shit</h3>
+        </div>
+      </article>
+
+      <article class="component red">
+        <header>
+          <div class="container">
+            <h2>Url Generation</h2>
+            <p>This component blablabla</p>
+          </div>
+        </header>
+        <div class="container content">
+          <h3>Allow awesome shit</h3>
+        </div>
+      </article>
+
+      <article class="component blue">
+        <header>
+          <div class="container">
+            <h2>Auto-Registration</h2>
+            <p>This component blablabla</p>
+          </div>
+        </header>
+        <div class="container content">
+          <h3>Allow awesome shit</h3>
+        </div>
+      </article>
+    </section>
+
+    {% include footer.html %}
   </body>
 </html>

@@ -1,0 +1,167 @@
+@font-face {
+    font-family: meta;
+    src: url(/fonts/meta-normal-regular-webfont.woff);
+}
+
+body {
+    padding-top: 93px;
+    font-family: meta, Serif;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar.navbar-default {
+    min-height: 93px;
+    border-radius: 0;
+    border: none;
+    background-color: white;
+    box-shadow: 0 6px 12px rgba(34,34,34,.1);
+}
+
+.navbar.navbar-default a.circle {
+    display: block;
+    float: left;
+    width: 12px;
+    height: 12px;
+    background-color: #DADADA;
+    margin-left: 55px;
+    border-radius: 6px;
+}
+
+.navbar.navbar-default a.circle:hover,
+.navbar.navbar-default a.circle.active {
+    background-color: #A9A9A9;
+}
+
+.navbar.navbar-default .navigation {
+    margin-top: -11px;
+}
+
+.navbar.navbar-default .container-fluid {
+    margin-top: 5px;
+}
+
+.jumbotron {
+    background-color: #B94A48;
+    color: white;
+    text-align: center;
+    padding: 120px 0;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+.discovering-links {
+    margin-top: 40px;
+}
+
+.custom-btn {
+    display: inline-block !important;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 13px 35px 13px 35px;
+    border-radius: 4px;
+    margin: 10px;
+    border: none;
+}
+
+.red-btn {
+    background: #e96656;
+}
+
+.red-btn:hover {
+    color: #FFF;
+    background: #cb4332;
+}
+
+.green-btn {
+    background: #20AA73;
+}
+
+.green-btn:hover {
+    color: #FFF;
+    background: #069059;
+}
+
+.btn:hover {
+    box-shadow: none;
+}
+
+.red-btn, .green-btn, .blue-btn {
+    color: #FFF !important;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.jumbotron h1 {
+    font-weight: bold;
+    font-size: 3.5em;
+}
+
+#why {
+    padding: 5em 0;
+    text-align: center;
+}
+
+#why header {
+    margin-bottom: 2em;
+}
+
+#why header p {
+    margin-bottom: 0;
+    color: #808080;
+}
+
+article.component header {
+    padding: 5em 0;
+    color: white;
+    text-align: center;
+}
+
+header h2 {
+    padding-bottom: 10px;
+    line-height: 40px;
+    position: relative;
+    display: inline-block;
+    font-size: 45px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 0
+}
+
+article.component header p {
+    font-size: 1.4em;
+}
+
+article.component.blue {
+    background: rgb(148, 196, 210);
+}
+
+article.component.red {
+    background: rgb(233, 102, 86);
+}
+
+article.component .content {
+    padding: 5em 0;
+}
+
+footer {
+    background-color: #272727;
+    min-height: 200px;
+    color: white;
+    padding: 5em 0;
+}
+
+footer .knp-network {
+    background: #171717;
+}
+
+footer .knp-network ul li a {
+    color: white;
+}
+
+footer .knp-network ul li a:hover {
+    color: #171717;
+}
