@@ -128,6 +128,11 @@ h1, h2, h3 {
     transition: all 0.2s ease-in-out;
 }
 
+.benefit-box .service-icon i {
+    background: url("/images/edgar-knp.png");
+    background-size: contain;
+}
+
 .benefit-box h3 {
     margin-bottom: 15px;
     color: #404040;
@@ -177,8 +182,12 @@ h1, h2, h3 {
     margin-top: 3em;
 }
 
-article.component header {
+article.component {
     padding: 5em 0;
+}
+
+article.component header {
+    padding-bottom: 2em;
     color: white;
     text-align: center;
 }
@@ -207,8 +216,12 @@ article.component.dark-blue {
 }
 
 article.component .content {
-    padding: 5em 0;
     color: white;
+}
+
+article.component .content p {
+    margin-bottom: 2em;
+    font-size: 1.2em;
 }
 
 footer {
