@@ -112,6 +112,69 @@ h1, h2, h3 {
 #why header p {
     margin-bottom: 0;
     color: #808080;
+    font-size: 1.4em;
+}
+
+.benefit-box .service-icon {
+    margin-bottom: 30px;
+    width: 145px;
+    height: 145px;
+    margin: auto;
+    border-radius: 50%;
+    border: 10px solid #ececec;
+    margin-bottom: 20px;
+    position: relative;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.benefit-box h3 {
+    margin-bottom: 15px;
+    color: #404040;
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 17px;
+    float: none;
+    width: auto;
+}
+
+.benefit-box p {
+    font-size: 1.2em;
+    line-height: 1em;
+}
+
+.benefit-box .service-icon .edgar {
+    border-radius: 50%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: block;
+}
+
+.benefit-box .service-icon:hover {
+    border: 10px solid #e96656;
+}
+
+.red-border-bottom:before {
+    position: absolute;
+    margin: auto;
+    z-index: 1;
+    content: "";
+    width: 75%;
+    height: 2px;
+    background: #e96656;
+    bottom: -9px;
+    left: 12.5%;
+}
+
+.benefits-list {
+    margin-top: 3em;
 }
 
 article.component header {
@@ -139,8 +202,8 @@ article.component.blue {
     background: rgb(148, 196, 210);
 }
 
-article.component.red {
-    background: rgb(233, 102, 86);
+article.component.dark-blue {
+    background: #057C8A;
 }
 
 article.component .content {
