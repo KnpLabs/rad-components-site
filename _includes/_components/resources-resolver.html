@@ -2,8 +2,8 @@
     <header>
         <div class="container">
             <h2>Resource Resolver</h2>
-            <p>Resource Resolvers are a way to resolve request attributes into their "model equivalent".</p>
-            <p>They are very similar to <a href="http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html">Param Converters</a>. They are, however far more flexible and powerful.</p>
+            <p>Resource Resolver is a way to resolve request attributes and get directly the model.</p>
+            <p>It is very similar to <a href="http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html">Param Converters</a>. They are, however far more flexible and powerful.</p>
         </div>
     </header>
     <div class="container content">
@@ -26,7 +26,7 @@ class BlogPostsController
             ->findAll()
         ;
 
-        return ['blogPosts' => $blogPosts];
+        // your logic
     }
 
     public function showAction($blogPostId)
@@ -37,7 +37,7 @@ class BlogPostsController
             ->find($blogPostId)
         ;
 
-        return ['blogPost' => $blogPost];
+        // your logic
     }
 }
 {% endhighlight %}
@@ -56,12 +56,12 @@ class BlogPostsController
 {
     public function indexAction(array $blogPosts)
     {
-        return ['blogPosts' => $blogPosts];
+        // your logic
     }
 
     public function showAction(BlogPost $blogPost)
     {
-        return ['blogPost' => $blogPost];
+        // your logic
     }
 }
 {% endhighlight %}
