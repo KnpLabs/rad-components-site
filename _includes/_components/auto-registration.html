@@ -2,27 +2,40 @@
     <header>
         <div class="container">
             <h2>Auto Registration</h2>
-            <p>This component blablabla</p>
+            <p>Don't bother anymore registrate your repositories, form extensions, security voters or twig extensions as services.</p>
         </div>
     </header>
     <div class="container content">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
         <div class="row">
             <div class="col-md-6">
                 <div class="standard">
                     <div class="banner"></div>
-{% highlight php %}
-<?php
+{% highlight yaml %}
+# services.yml
 
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
+# Hurtful declarations...
+
+app.form.extension.my_form_extension:
+    class: App\Form\Extension\MyFormExtension
+    tags:
+        - { name: form.type_extension, extended_type: SomeType }
+
+app.repository.some_entity_repository:
+    class: App\Repository\SomeEntityRepository
+    factory_service: doctrine.orm.default_entity_manager
+    factory_method: getRepository
+    arguments:
+        - App\Entity\SomeEntityRepository
+
+app.security.some_security_voter
+    class: App\Security\SomeSecurityVoter
+    tags:
+        - { name: security.voter }
+
+app.twig.some_extension:
+    class: App\Twig\SomeExtension
+    tags:
+        - { name: twig.extension }
 {% endhighlight %}
                 </div>
             </div>
@@ -30,19 +43,27 @@ class Test
             <div class="col-md-6">
                 <div class="rad">
                     <div class="banner"></div>
-{% highlight php %}
-<?php
+{% highlight yaml %}
+# config.yml
 
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
+# Just activate the lines you need
+
+knp_rad_auto_registration:
+    enable:
+        doctrine: ~
+        doctrine_mongodb: ~
+        doctrine_couchdb: ~
+        form_type_extension: ~
+        security_voter: ~
+        twig_extension: ~
 {% endhighlight %}
                 </div>
             </div>
+        </div>
+        <div class="row text-center">
+            <a href="https://github.com/KnpLabs/rad-auto-registration" class="btn btn-primary custom-btn red-btn try-it" target="_blank">
+                <i class="fa fa-github"></i><span>Try it !</span>
+            </a>
         </div>
     </div>
 </article>
