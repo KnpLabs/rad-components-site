@@ -2,13 +2,11 @@
     <header>
         <div class="container">
             <h2>Resource Resolver</h2>
-            <p>This component blablabla</p>
+            <p>Resource Resolvers are a way to resolve request attributes into their "model equivalent".</p>
+            <p>They are very similar to <a href="http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html">Param Converters</a>. They are, however far more flexible and powerful.</p>
         </div>
     </header>
     <div class="container content">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
         <div class="row">
             <div class="col-md-6">
                 <div class="standard">
@@ -16,12 +14,31 @@
 {% highlight php %}
 <?php
 
-class Test
+namespace App\Controller;
+
+class BlogPostsController
 {
-    public function test(SomeClass $subject)
+    public function indexAction()
     {
-        return $subject->doSomething();
-        }
+        $blogPosts = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Blogpost')
+            ->findAll()
+        ;
+
+        return ['blogPosts' => $blogPosts];
+    }
+
+    public function showAction($blogPostId)
+    {
+        $blogPost = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Blogpost')
+            ->find($blogPostId)
+        ;
+
+        return ['blogPost' => $blogPost];
+    }
 }
 {% endhighlight %}
                 </div>
@@ -33,16 +50,28 @@ class Test
 {% highlight php %}
 <?php
 
-class Test
+namespace App\Controller;
+
+class BlogPostsController
 {
-    public function test(SomeClass $subject)
+    public function indexAction(array $blogPosts)
     {
-        return $subject->doSomething();
+        return ['blogPosts' => $blogPosts];
+    }
+
+    public function showAction(BlogPost $blogPost)
+    {
+        return ['blogPost' => $blogPost];
     }
 }
 {% endhighlight %}
                 </div>
             </div>
+        </div>
+        <div class="row text-center">
+            <a href="https://github.com/KnpLabs/rad-resource-resolver" class="btn btn-primary custom-btn red-btn try-it" target="_blank">
+                <i class="fa fa-github"></i><span>Try it !</span>
+            </a>
         </div>
     </div>
 </article>
