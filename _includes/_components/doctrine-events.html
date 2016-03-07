@@ -2,25 +2,43 @@
     <header>
         <div class="container">
             <h2>Doctrine Events</h2>
-            <p>This component blablabla</p>
+            <p>Access the easy way to your doctrine events from the Symfony DIC.</p>
         </div>
     </header>
     <div class="container content">
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
         <div class="row">
             <div class="col-md-6">
                 <div class="standard">
                     <div class="banner"></div>
+{% highlight yaml %}
+services:
+    app.event_listener.some_entity_listener:
+        class: App\EventListener\SomeEntityListener
+        tags:
+            - { name: doctrine.event_listener, event: pre_persist, method: prePersist }
+{% endhighlight %}
+                </div>
+
+                <div class="standard">
 {% highlight php %}
 <?php
 
-class Test
+namespace App\EventListener;
+
+use App\Entity\SomeEntity;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+
+class SomeEntityListener
 {
-    public function test(SomeClass $subject)
+    public function prePersist(LifecycleEventArgs $args)
     {
-        return $subject->doSomething();
+        $entity = $args->getEntity();
+
+        if (false === $entity instanceof SomeEntity) {
+            return;
+        }
+
+        // Some stuff
     }
 }
 {% endhighlight %}
@@ -30,19 +48,40 @@ class Test
             <div class="col-md-6">
                 <div class="rad">
                     <div class="banner"></div>
+{% highlight yaml %}
+services:
+    app.event_listener.user_listener:
+        class: App\EventListener\UserListener
+        tags:
+            - { name: kernel.event_listener, event: app.entity.some_entity.pre_persist, method: prePersist }
+{% endhighlight %}
+                </div>
+
+                <div class="rad">
 {% highlight php %}
 <?php
 
-class Test
+namespace App\EventListener;
+
+use Knp\Rad\DoctrineEvent\Event\DoctrineEvent;
+
+class SomeEntityListener
 {
-    public function test(SomeClass $subject)
+    public function prePersist(DoctrineEvent $event)
     {
-        return $subject->doSomething();
+        $entity = $event->getEntity();
+
+        // Some stuff
     }
 }
 {% endhighlight %}
                 </div>
             </div>
+        </div>
+        <div class="row text-center">
+            <a href="https://github.com/KnpLabs/rad-doctrine-events" class="btn btn-primary custom-btn red-btn try-it" target="_blank">
+                <i class="fa fa-github"></i><span>Try it !</span>
+            </a>
         </div>
     </div>
 </article>
