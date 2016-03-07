@@ -1,0 +1,51 @@
+<article class="component blue">
+    <header>
+        <div class="container">
+            <h2>View Renderer</h2>
+            <p>Don't bother with render functions anymore.</p>
+        </div>
+    </header>
+    <div class="container content">
+        <p>Following the Symfony conventions, the View Renderer component will try to render the appropriate twig template, if no Response object was returned from the Controller. You can still of course return a response when you want.</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="standard">
+                    <div class="banner"></div>
+{% highlight php %}
+<?php
+
+namespace App\Controller;
+
+class BasicController
+{
+    public function someAction($var)
+    {
+        return $this->render('App:Basic:some.html.twig', ['var' => $var]);
+    }
+}
+{% endhighlight %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="rad">
+                    <div class="banner"></div>
+{% highlight php %}
+<?php
+
+namespace App\Controller;
+
+class BasicController
+{
+    public function someAction($var)
+    {
+        // Will look for App\Resources\views\Basic\some.html.twig
+        return ['var' => $var];
+    }
+}
+{% endhighlight %}
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
