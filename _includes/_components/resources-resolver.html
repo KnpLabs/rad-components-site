@@ -2,8 +2,8 @@
     <header>
         <div class="container">
             <h2>Resource Resolver</h2>
-            <p>Resource Resolver is a way to resolve request attributes and get directly the model.</p>
-            <p>It is very similar to <a href="http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html">Param Converters</a>. They are, however far more flexible and powerful.</p>
+            <p>Resource Resolver is a way to resolve request attributes and get directly the value.</p>
+            <p>It is very similar to <a href="http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/converters.html">Param Converters</a>. It is however far more flexible and powerful.</p>
         </div>
     </header>
     <div class="container content">
@@ -11,33 +11,49 @@
             <div class="col-md-6">
                 <div class="standard">
                     <div class="banner"></div>
+{% highlight yaml %}
+# routing.yml
+
+article_index:
+    path: /articles/
+    defaults:
+        # ...
+
+article_show:
+    path: /articles/{id}
+    defaults:
+        # ...
+{% endhighlight %}
+                </div>
+
+                <div class="standard">
 {% highlight php %}
 <?php
 
 namespace App\Controller;
 
-class BlogPostsController
+class ArticlesController
 {
     public function indexAction()
     {
-        $blogPosts = $this->getDoctrine()
+        $articles = $this->getDoctrine()
             ->getManager()
-            ->getRepository('App:Blogpost')
+            ->getRepository('App:Article')
             ->findAll()
         ;
 
-        // your logic
+        // ...
     }
 
-    public function showAction($blogPostId)
+    public function showAction($articleId)
     {
-        $blogPost = $this->getDoctrine()
+        $article = $this->getDoctrine()
             ->getManager()
-            ->getRepository('App:Blogpost')
-            ->find($blogPostId)
+            ->getRepository('App:Article')
+            ->find($articleId)
         ;
 
-        // your logic
+        // ...
     }
 }
 {% endhighlight %}
@@ -47,21 +63,48 @@ class BlogPostsController
             <div class="col-md-6">
                 <div class="rad">
                     <div class="banner"></div>
+{% highlight yaml %}
+# routing.yml
+
+article_index:
+    path: /articles/
+    defaults:
+        # ...
+        _resources:
+            articles:
+                service: my.article.repository
+                method: findAll
+
+article_show:
+    path: /articles/{id}
+    defaults:
+        # ...
+        _resources:
+            article:
+                service: my.article.repository
+                method: find
+                arguments: [$id]
+{% endhighlight %}
+                </div>
+
+                <div class="rad">
 {% highlight php %}
 <?php
 
 namespace App\Controller;
 
-class BlogPostsController
+use App\Entity\Article;
+
+class ArticlesController
 {
-    public function indexAction(array $blogPosts)
+    public function indexAction(array $articles)
     {
-        // your logic
+        // ...
     }
 
-    public function showAction(BlogPost $blogPost)
+    public function showAction(Article $article)
     {
-        // your logic
+        // ...
     }
 }
 {% endhighlight %}
