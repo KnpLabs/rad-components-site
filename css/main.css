@@ -271,3 +271,12 @@ figure.highlight pre {
     background: url("/images/rad.png") no-repeat right top;
     top: 3px;
 }
+
+.try-it {
+    margin-top: 2em;
+    font-size: 1.3em;
+}
+
+.try-it span {
+    margin-left: 10px;
+}
