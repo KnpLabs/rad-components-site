@@ -10,5 +10,5 @@ You must have `Ruby` (2.0) installed.
 ```bash
 $ gem install jekyll
 $ gem install rouge
-$ gem serve
+$ jekyll serve
 ```

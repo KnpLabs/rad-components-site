@@ -4,12 +4,12 @@
         <header>
           <div class="container">
             <h2>Url Generation</h2>
-            <p>This component blablabla</p>
+            <p>This component will simply auto-complete needed route parameters with existing ones.</p>
           </div>
         </header>
         <div class="container content">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Just continue to use former url generation, nothing changes concerning the implementation. The only change is you don't repeat current route parameters anymore.
           </p>
           <div class="row">
             <div class="col-md-6">
@@ -18,11 +18,32 @@
 {% highlight php %}
 <?php
 
-class Test
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+class TestController
 {
-    public function test(SomeClass $subject)
+    /**
+     * @Route(
+     *  "/shop/{shopId}",
+     *  name="shop_show"
+     * )
+     */
+    public function showAction($shopId)
     {
-        return $subject->doSomething();
+        return $this->redirectToRoute('shop_products', [
+            'shopId' => $shopId,
+        ]);
+    }
+
+    /**
+     * @Route(
+     *  "/shop/{shopId}/products",
+     *  name="shop_products"
+     * )
+     */
+    public function productsAction($shopId)
+    {
+        // ...
     }
 }
 {% endhighlight %}
@@ -35,16 +56,43 @@ class Test
 {% highlight php %}
 <?php
 
-class Test
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
+class TestController
 {
-    public function test(SomeClass $subject)
+    /**
+     * @Route(
+     *  "/shop/{shopId}",
+     *  name="shop_show"
+     * )
+     */
+    public function showAction($shopId)
     {
-        return $subject->doSomething();
+        return $this->redirectToRoute('shop_products');
+    }
+
+    /**
+     * @Route(
+     *  "/shop/{shopId}/products",
+     *  name="shop_products"
+     * )
+     */
+    public function productsAction($shopId)
+    {
+        // ...
     }
 }
 {% endhighlight %}
               </div>
             </div>
+          </div>
+          <p>
+              Works also with url and path Twig functions or everywhere else you use the Symfony Router.
+          </p>
+          <div class="row text-center">
+              <a href="https://github.com/KnpLabs/rad-url-generation" class="btn btn-primary custom-btn red-btn try-it" target="_blank">
+                  <i class="fa fa-github"></i><span>Try it !</span>
+              </a>
           </div>
         </div>
       </article>
