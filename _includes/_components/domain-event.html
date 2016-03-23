@@ -1,50 +1,139 @@
-<!-- TODO -->
-
-      <article class="component dark-blue">
-        <header>
-          <div class="container">
+<article class="component dark-blue">
+    <header>
+        <div class="container">
             <h2>Domain Event</h2>
-            <p>This component blablabla</p>
-          </div>
-        </header>
-        <div class="container content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="standard">
-                <div class="banner"></div>
-{% highlight php %}
-<?php
-
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
-{% endhighlight %}
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="rad">
-                <div class="banner"></div>
-{% highlight php %}
-<?php
-
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
-{% endhighlight %}
-              </div>
-            </div>
-          </div>
+            <p>The raise method allows you to trigger any event in your entity and a Knp\Rad\DomainEvent\Event once the entity is flushed.</p>
         </div>
-      </article>
+    </header>
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="standard">
+                    <div class="banner"></div>
+{% highlight php %}
+<?php
+
+namespace App\Entity;
+
+class MyEntity
+{
+    private $param;
+
+    public function setParam($param)
+    {
+        $this->param = $param;
+
+        return $this;
+    }
+}
+{% endhighlight %}
+                </div>
+
+                <div class="rad">
+{% highlight php %}
+<?php
+
+namespace App\EventListener;
+
+use Doctrine\ORM\Event\PreUpdateEventArgs;
+use App\Entity\MyEntity;
+
+class MyEventListener
+{
+    public function preUpdate(PreUpdateEventArgs $event)
+    {
+        $entity = $event->getEntity();
+
+        if (!$entity instanceof MyEntity) {
+            return;
+        }
+
+        if ($event->hasChangedField('param')) {
+            // Some stuff
+        }
+    }
+}
+{% endhighlight %}
+                </div>
+
+                <div class="rad">
+{% highlight yaml %}
+# services.yml
+
+app.event_listener.my_event_listener:
+    class: AppBundle\EventListener\MyEventListener
+    tags:
+        - { name: doctrine.event_listener, event: preUpdate }
+{% endhighlight %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="rad">
+                    <div class="banner"></div>
+{% highlight php %}
+<?php
+
+namespace App\Entity;
+
+use Knp\Rad\DomainEvent;
+
+class MyEntity implements DomainEvent\Provider
+{
+    use DomainEvent\ProviderTrait;
+
+    private $param;
+
+    public function setParam($param)
+    {
+        $this->param = $param;
+
+        $this->raise('myEventName', [
+            'anyKey' => 'anyValue'
+        ]);
+
+        return $this;
+    }
+}
+{% endhighlight %}
+                </div>
+
+                <div class="rad">
+{% highlight php %}
+<?php
+
+namespace App\EventListener;
+
+use Knp\Rad\DomainEvent\Event;
+
+class MyEventListener
+{
+    public function onMyEventName(Event $event)
+    {
+        $anyValue = $event->anykey;
+
+        // Some stuff
+    }
+}
+{% endhighlight %}
+                </div>
+
+                <div class="rad">
+{% highlight yaml %}
+# services.yml
+
+app.event_listener.my_event_listener:
+    class: App\EventListener\MyEventListener
+    tags:
+        - { name: kernel.event_listener, event: myEventName, method: 'onMyEventName' }
+{% endhighlight %}
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <a href="https://github.com/KnpLabs/rad-domain-event" class="btn btn-primary custom-btn red-btn try-it" target="_blank">
+                <i class="fa fa-github"></i><span>Try it !</span>
+            </a>
+        </div>
+    </div>
+</article>
