@@ -1,50 +1,109 @@
-<!-- TODO -->
-
-      <article class="component blue">
-        <header>
-          <div class="container">
+<article class="component blue">
+    <header>
+        <div class="container">
             <h2>Fixtures Load</h2>
-            <p>This component blablabla</p>
-          </div>
-        </header>
-        <div class="container content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="standard">
-                <div class="banner"></div>
-{% highlight php %}
-<?php
-
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
-{% endhighlight %}
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="rad">
-                <div class="banner"></div>
-{% highlight php %}
-<?php
-
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
-{% endhighlight %}
-              </div>
-            </div>
-          </div>
+            <p>Allows you to use nelmio/alice library when loading your fixtures.</p>
         </div>
-      </article>
+    </header>
+
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="standard">
+                    <div class="banner"></div>
+{% highlight php %}
+<?php
+
+namespace App\DataFixtures\ORM;
+
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\Entity\User;
+
+class LoadUserData implements FixtureInterface
+{
+    public function load(ObjectManager $manager)
+    {
+        for ($i = 0; $i < 10; $i++) {
+            $timestamp = mt_rand(1, time());
+            $randomDate = new DateTime('@'.$timestamp);
+
+            $user = new User();
+            $user->setUsername($this->generateUsername());
+            $user->setBirthday($randomDate);
+            $user->setEmail($this->generateEmail());
+
+            $manager->persist($user);
+        }
+
+        $manager->flush();
+    }
+
+    private function generateUsername()
+    {
+        $usernames = [
+            'nrats',
+            'nrstauie',
+            'nrpuldv'
+        ];
+
+        return array_rand($usernames);
+    }
+
+    private function generateEmail()
+    {
+        $mails = [
+            'nrats@mail.com',
+            'nrstauie@mail.com',
+            'nrpuldv@mail.com'
+        ];
+
+        return array_rand($mails);
+    }
+}
+{% endhighlight %}
+                </div>
+
+                <div class="standard">
+{% highlight sh %}
+#Symfony2
+$ php app/console doctrine:fixtures:load
+
+#Symfony3
+$ php bin/console doctrine:fixtures:load
+{% endhighlight %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="rad">
+                    <div class="banner"></div>
+{% highlight yml %}
+# Resources/fixtures/orm/users.yml
+
+App\Entity\User:
+    user_{1..10}:
+        username: <username()>
+        birthday: <dateTime()>
+        email: <email()>
+{% endhighlight %}
+                </div>
+
+                <div class="standard">
+{% highlight sh %}
+#Symfony2
+$ php app/console rad:fixtures:load
+
+#Symfony3
+$ php bin/console rad:fixtures:load
+{% endhighlight %}
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <a href="https://github.com/KnpLabs/rad-fixtures-load" class="btn btn-primary custom-btn red-btn try-it" target="_blank">
+                <i class="fa fa-github"></i><span>Try it !</span>
+            </a>
+        </div>
+    </div>
+</article>
