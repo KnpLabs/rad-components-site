@@ -1,6 +1,19 @@
 @font-face {
-    font-family: meta;
-    src: url(/fonts/meta-normal-regular-webfont.woff);
+    font-family: 'meta';
+    src : url('../fonts/meta-normal-regular-webfont.woff') format('woff'),
+          url('../fonts/meta-normal-regular-webfont.eot') format('eot'),
+          url('../fonts/meta-normal-regular-webfont.svg') format('svg'),
+          url('../fonts/meta-normal-regular-webfont.ttf') format('truetype')
+    ;
+}
+
+@font-face{
+    font-family : 'meta-bold';
+    src : url('../fonts/meta-bold-regular-webfont.woff') format('woff'),
+          url('../fonts/meta-bold-regular-webfont.eot') format('eot'),
+          url('../fonts/meta-bold-regular-webfont.svg') format('svg'),
+          url('../fonts/meta-bold-regular-webfont.ttf') format('truetype')
+    ;
 }
 
 body {
@@ -96,7 +109,7 @@ h1, h2, h3 {
 }
 
 .jumbotron h1 {
-    font-weight: bold;
+    font-family : 'meta-bold';
     font-size: 3.5em;
 }
 
@@ -140,7 +153,7 @@ h1, h2, h3 {
     display: inline-block;
     text-transform: uppercase;
     margin-bottom: 30px;
-    font-weight: bold;
+    font-family : 'meta-bold';
     font-size: 17px;
     float: none;
     width: auto;
@@ -198,7 +211,7 @@ header h2 {
     position: relative;
     display: inline-block;
     font-size: 45px;
-    font-weight: bold;
+    font-family : 'meta-bold';
     margin-top: 0;
     margin-bottom: 0
 }
@@ -226,13 +239,18 @@ article.component .content p {
 
 footer {
     background-color: #272727;
-    min-height: 200px;
     color: white;
-    padding: 5em 0;
+}
+
+footer .knp-logo {
+    padding: 10px 0;
+    line-height: 50px;
 }
 
 footer .knp-network {
     background: #171717;
+    text-align: center;
+    padding: 10px 0;
 }
 
 footer .knp-network ul li a {
@@ -241,6 +259,11 @@ footer .knp-network ul li a {
 
 footer .knp-network ul li a:hover {
     color: #171717;
+}
+
+footer .navbar-social {
+    display: inline-block;
+    float: none;
 }
 
 .content .standard, .content .rad {
