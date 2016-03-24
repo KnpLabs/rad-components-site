@@ -53,6 +53,11 @@ h1, h2, h3 {
     margin-bottom: 0;
 }
 
+#discover {
+    padding-top: 50px;
+    margin-top: -50px;
+}
+
 .discovering-links {
     margin-top: 40px;
 }
@@ -101,7 +106,9 @@ h1, h2, h3 {
 }
 
 #why {
-    padding: 5em 0;
+    padding-top: 70px;
+    margin-top: -70px;
+    padding-bottom: 5em;
     text-align: center;
 }
 
@@ -113,6 +120,10 @@ h1, h2, h3 {
     margin-bottom: 0;
     color: #808080;
     font-size: 1.4em;
+}
+
+#why .container {
+    padding-top: 5em;
 }
 
 .benefit-box .service-icon {
@@ -129,7 +140,7 @@ h1, h2, h3 {
 }
 
 .benefit-box .service-icon i {
-    background: url("/images/edgar-knp.png");
+    background: url("../images/edgar-knp.png");
     background-size: contain;
 }
 
@@ -260,7 +271,7 @@ figure.highlight pre {
     height: 49px;
     position: absolute;
     right: -32px;
-    background: url("/images/standard.png") no-repeat right top;
+    background: url("../images/standard.png") no-repeat right top;
 }
 
 .content .rad .banner {
@@ -268,7 +279,7 @@ figure.highlight pre {
     height: 41px;
     position: absolute;
     right: -15px;
-    background: url("/images/rad.png") no-repeat right top;
+    background: url("../images/rad.png") no-repeat right top;
     top: 3px;
 }
 

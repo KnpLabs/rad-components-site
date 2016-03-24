@@ -1,51 +1,152 @@
-<!-- TODO -->
-
-      <article class="component dark-blue">
-        <header>
-          <div class="container">
+<article class="component dark-blue">
+    <header>
+        <div class="container">
             <h2>Users</h2>
-            <p>This component blablabla</p>
-          </div>
-        </header>
-        <div class="container content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="standard">
-                <div class="banner"></div>
-{% highlight php %}
-<?php
-
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
-{% endhighlight %}
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="rad">
-                <div class="banner"></div>
-{% highlight php %}
-<?php
-
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
-{% endhighlight %}
-              </div>
-            </div>
-          </div>
+            <p>A simple way to handle password encryption and salt generation.</p>
         </div>
-      </article>
+    </header>
+    <div class="container content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="standard">
+                    <div class="banner"></div>
+{% highlight php %}
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+class User implements UserInterface
+{
+    private $id;
+
+    private $password;
+
+    // ...
+
+    public function __construct()
+    {
+        $this->salt = md5(uniqid(null, true));
+    }
+
+    // ...
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+}
+{% endhighlight %}
+                </div>
+
+                <div class="standard">
+{% highlight php %}
+<?php
+
+namespace App\Controller;
+
+use App\Controller\Controller;
+use App\Entity\User;
+
+class UserController extends Controller
+{
+    public function newUserAction($email,$plainPassword)
+    {
+        $user = new User();
+        $salt = $user->getSalt();
+        $factory = $this->container->get('
+            security.encoder_factory'
+        );
+        $encoder = $factory->getEncoder($user);
+        $password = $encoder->encodePassword(
+            $plainPassword,
+            $salt
+        );
+
+        $user->setPassword($password);
+        $user->setEmail($email);
+
+        // ...
+    }
+}
+{% endhighlight %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="rad">
+                    <div class="banner"></div>
+{% highlight php %}
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Knp\Rad\User\HasPassword;
+use Knp\Rad\User\HasSalt;
+
+class User implements HasPassword, HasSalt
+{
+    use HasPassword\HasPassword;
+    use HasSalt\HasSalt;
+
+    private $id;
+
+    private $password;
+
+    private $salt;
+
+    // ...
+}
+{% endhighlight %}
+                </div>
+
+                <div class="standard">
+{% highlight php %}
+<?php
+
+namespace App\Controller;
+
+use App\Controller\Controller;
+use App\Entity\User;
+
+class UserController extends Controller
+{
+    public function newUserAction($email,$plainPassword)
+    {
+        $user = new User();
+        $user->setPlainPassword($plainPassword);
+        $user->setEmail($email);
+
+        //When flushing, the plain password is
+        // automatically encrypted in password
+        // and the salt will be auto-generated
+
+        // ...
+    }
+}
+{% endhighlight %}
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <a href="https://github.com/KnpLabs/rad-user" class="btn btn-primary custom-btn red-btn try-it" target="_blank">
+                <i class="fa fa-github"></i><span>Try it !</span>
+            </a>
+        </div>
+    </div>
+</article>
 
