@@ -280,3 +280,7 @@ figure.highlight pre {
 .try-it span {
     margin-left: 10px;
 }
+
+.language-sh{
+    color: #ccc;
+}
