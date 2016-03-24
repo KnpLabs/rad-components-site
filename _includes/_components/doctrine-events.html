@@ -2,10 +2,11 @@
     <header>
         <div class="container">
             <h2>Doctrine Events</h2>
-            <p>Access the easy way to your doctrine events from the Symfony DIC.</p>
+            <p>A single events doctrine dispatcher in the Symfony dispatcher</p>
         </div>
     </header>
     <div class="container content">
+        <p>It is able to access the easy way to your doctrine events from the Symfony DependencyInjection Component.</p>
         <div class="row">
             <div class="col-md-6">
                 <div class="standard">
@@ -50,8 +51,8 @@ class SomeEntityListener
                     <div class="banner"></div>
 {% highlight yaml %}
 services:
-    app.event_listener.user_listener:
-        class: App\EventListener\UserListener
+    app.event_listener.some_entity_listener:
+        class: App\EventListener\SomeEntityListener
         tags:
             - { name: kernel.event_listener, event: app.entity.some_entity.pre_persist, method: prePersist }
 {% endhighlight %}
