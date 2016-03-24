@@ -1,4 +1,4 @@
-<article class="component dark-blue">
+<article class="component blue">
     <header>
         <div class="container">
             <h2>Fixtures Load</h2>
@@ -41,22 +41,14 @@ class LoadUserData implements FixtureInterface
 
     private function generateUsername()
     {
-        $usernames = [
-            'nrats',
-            'nrstauie',
-            'nrpuldv'
-        ];
+        $usernames = ['artium', 'nondum', 'codicem', 'primae', 'firmato'];
 
         return array_rand($usernames);
     }
 
     private function generateEmail()
     {
-        $mails = [
-            'nrats@mail.com',
-            'nrstauie@mail.com',
-            'nrpuldv@mail.com'
-        ];
+        $mails = ['mittendus@mail.com', 'fumo@mail.com', 'lanuginis@mail.com', 'spectante@mail.com', 'duci@mail.com'];
 
         return array_rand($mails);
     }

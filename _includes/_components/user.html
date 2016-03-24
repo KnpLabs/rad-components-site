@@ -1,4 +1,4 @@
-<article class="component blue">
+<article class="component dark-blue">
     <header>
         <div class="container">
             <h2>Users</h2>
@@ -68,14 +68,10 @@ class UserController extends Controller
     {
         $user = new User();
         $salt = $user->getSalt();
-        $factory = $this->container->get('
-            security.encoder_factory'
-        );
+
+        $factory = $this->container->get('security.encoder_factory');
         $encoder = $factory->getEncoder($user);
-        $password = $encoder->encodePassword(
-            $plainPassword,
-            $salt
-        );
+        $password = $encoder->encodePassword($plainPassword, $salt);
 
         $user->setPassword($password);
         $user->setEmail($email);
