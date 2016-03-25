@@ -152,8 +152,33 @@ h1, h2, h3 {
     transition: all 0.2s ease-in-out;
 }
 
-.benefit-box .service-icon i {
-    background: url("../images/edgar-knp.png");
+.benefit-box .service-icon .rocket {
+    background: url("../images/rocket.svg");
+    background-size: contain;
+}
+
+.benefit-box .service-icon .thumb {
+    background: url("../images/thumb.svg");
+    background-size: contain;
+}
+
+.benefit-box .service-icon .cogs {
+    background: url("../images/cogs.svg");
+    background-size: contain;
+}
+
+.benefit-box .service-icon .feather {
+    background: url("../images/feather.svg");
+    background-size: contain;
+}
+
+.benefit-box .service-icon .tested {
+    background: url("../images/tested.svg");
+    background-size: contain;
+}
+
+.benefit-box .service-icon .certified {
+    background: url("../images/certified2.svg");
     background-size: contain;
 }
 
