@@ -178,7 +178,7 @@ h1, h2, h3 {
 }
 
 .benefit-box .service-icon .certified {
-    background: url("../images/certified2.svg");
+    background: url("../images/certified.svg");
     background-size: contain;
 }
 
