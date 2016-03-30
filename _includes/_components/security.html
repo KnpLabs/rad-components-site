@@ -20,9 +20,7 @@ class ArticleController extends Controller
 {
     public function indexAction()
     {
-        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createUnauthorizedException();
-        }
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, 'Unable to access this page!');
 
         // ...
     }
@@ -44,7 +42,7 @@ class ArticleController extends Controller
         if (!$this->isGranted(['IS_MEMBER', 'ANOTHER_ROLE'], $article) ||
             !$this->isGranted('IS_ADMIN', $owners)
         ) {
-            throw $this->createUnauthorizedException();
+            throw $this->createAccessDeniedException();
         }
 
         // ...
