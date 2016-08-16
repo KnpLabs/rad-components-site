@@ -20,7 +20,10 @@ class BasicController
 {
     public function someAction($var)
     {
-        return $this->render('App:Basic:some.html.twig', ['var' => $var]);
+        return $this->render(
+            'App:Basic:some.html.twig',
+            ['var' => $var]
+        );
     }
 }
 {% endhighlight %}

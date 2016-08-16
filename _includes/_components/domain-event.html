@@ -89,9 +89,7 @@ class MyEntity implements DomainEvent\Provider
     {
         $this->param = $param;
 
-        $this->raise('myEventName', [
-            'anyKey' => 'anyValue'
-        ]);
+        $this->raise('myEventName', ['anyKey' => 'anyValue']);
 
         return $this;
     }

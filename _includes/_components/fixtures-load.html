@@ -2,12 +2,11 @@
     <header>
         <div class="container">
             <h2>Fixtures Load</h2>
-            <p>A command to load them all</p>
+            <p>Allows you to use <a target="_blank" href="https://github.com/nelmio/alice">nelmio/alice</a> library when loading your fixtures.</p>
         </div>
     </header>
 
     <div class="container content">
-        <p>The <a target="_blank" href="https://github.com/nelmio/alice">Nelmio/Alice</a> library is very simple system to load fake data files, easily understandable, useful for developing and testing a project. The component allows you to use Alice files when loading your fixtures, with a simple command.</p>
         <div class="row">
             <div class="col-md-6">
                 <div class="standard">
@@ -42,22 +41,14 @@ class LoadUserData implements FixtureInterface
 
     private function generateUsername()
     {
-        $usernames = [
-            'nrats',
-            'nrstauie',
-            'nrpuldv'
-        ];
+        $usernames = ['artium', 'nondum', 'codicem', 'primae', 'firmato'];
 
         return array_rand($usernames);
     }
 
     private function generateEmail()
     {
-        $mails = [
-            'nrats@mail.com',
-            'nrstauie@mail.com',
-            'nrpuldv@mail.com'
-        ];
+        $mails = ['mittendus@mail.com', 'fumo@mail.com', 'lanuginis@mail.com', 'spectante@mail.com', 'duci@mail.com'];
 
         return array_rand($mails);
     }

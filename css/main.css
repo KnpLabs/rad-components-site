@@ -314,6 +314,10 @@ figure.highlight pre {
     font-size: 1.1em;
 }
 
+pre code {
+    white-space: pre;
+}
+
 .content .standard .banner {
     width: 120px;
     height: 49px;

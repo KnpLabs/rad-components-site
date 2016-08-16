@@ -1,50 +1,88 @@
-<!-- TODO -->
-
-      <article class="component dark-blue">
-        <header>
-          <div class="container">
-            <h2>Security</h2>
-            <p>This component blablabla</p>
-          </div>
-        </header>
-        <div class="container content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="standard">
-                <div class="banner"></div>
-{% highlight php %}
-<?php
-
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
-{% endhighlight %}
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="rad">
-                <div class="banner"></div>
-{% highlight php %}
-<?php
-
-class Test
-{
-    public function test(SomeClass $subject)
-    {
-        return $subject->doSomething();
-    }
-}
-{% endhighlight %}
-              </div>
-            </div>
-          </div>
+<article class="component dark-blue">
+    <header>
+        <div class="container">
+        <h2>Security</h2>
+        <p>Perform security check at routing level instead of in the controller.</p>
         </div>
-      </article>
+    </header>
+    <div class="container content">
+        <p>Through simple configuration in the routing, this component allows to grant access according resolved resources. And combined with the rad-resource-resolver component, it also allows to set conditions on request attributes.</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="standard">
+                    <div class="banner"></div>
+{% highlight php %}
+<?php
+
+namespace App\Controller;
+
+class ArticleController extends Controller
+{
+    public function indexAction()
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY', null, 'Unable to access this page!');
+
+        // ...
+    }
+
+    public function detailsAction($articleId)
+    {
+        $article = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Article')
+            ->find($articleId)
+        ;
+
+        $owners = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('App:Owner')
+            ->findAllForArticle($article)
+        ;
+
+        if (!$this->isGranted(['IS_MEMBER', 'ANOTHER_ROLE'], $article) ||
+            !$this->isGranted('IS_ADMIN', $owners)
+        ) {
+            throw $this->createAccessDeniedException();
+        }
+
+        // ...
+    }
+}
+{% endhighlight %}
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="rad">
+                    <div class="banner"></div>
+{% highlight yaml %}
+# routing.yml
+article_index:
+    path: /articles/
+    defaults:
+        // ...
+        _security:
+            - roles: IS_AUTHENTICATED_FULLY
+
+article_details:
+    path: /articles/{id}/owners/
+    defaults:
+        // ...
+        _resources:
+            article:
+                // ...
+            owners:
+                // ...
+        _security:
+            -
+                roles: [IS_MEMBER, ANOTHER_ROLE]
+                subject: article
+            -
+                roles: IS_ADMIN
+                subject: owners
+{% endhighlight %}
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
