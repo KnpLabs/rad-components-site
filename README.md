@@ -3,7 +3,11 @@ KNP Rad Components Site
 
 Jekyll website for RAD Components.
 
-## Requirements & Installation
+# Official maintainers:
+
+* [@Einenlum](https://github.com/Einenlum)
+
+# Requirements & Installation
 
 You must have `Ruby` (2.0) installed.
 
